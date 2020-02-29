@@ -15,9 +15,6 @@ use kartik\sidenav\SideNav;
 AppAsset::register($this);
 
 $this->registerCss("
-    // .container{
-    //     margin-left: inherit !important;
-    // }
     .atacado-sidebar{
         margin-top: 50px;
         width: 205px;
@@ -34,13 +31,8 @@ $this->registerCss("
     .container{
         margin-left: 205px !important;
     }
-    .navbar-collapse .navbar-right{
-        margin-right: -265px !important;
-    }
-
-    @media (min-width: 1200px)
     .container {
-        width: 1070px !important;
+        width: 85%;;
     }
 ");
     
@@ -123,10 +115,7 @@ $this->registerCss("
             [
                 'label' => 'Usuário',
                 'icon' => 'cog',
-                'items' => [
-                    ['label' => 'Novo', 'icon'=>'plus-sign', 'url'=>['/usuario/create']],
-                    ['label' => 'Gerenciar', 'icon'=>'th-list', 'url'=>['/usuario/index']],
-                ],
+                'url'=>['/usuario/index']
             ],
             [
                 'url' => '#',
