@@ -36,9 +36,11 @@ class Usuario extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return [
             [['nome', 'login', 'senha'], 'required'],
+            [['login'], 'unique'],
             [['ativo'], 'integer'],
+            [['ativo'], 'default', 'value' => 1],
             [['criado', 'modificado'], 'safe'],
-            [['nome', 'senha'], 'string', 'max' => 255],
+            [['nome', 'senha'], 'string', 'max' => 255, 'min' => 4],
             [['login'], 'string', 'max' => 50],
         ];
     }
