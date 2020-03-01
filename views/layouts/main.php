@@ -87,8 +87,8 @@ $this->registerCss("
                 'label' => 'Cliente',
                 'icon' => 'user',
                 'items' => [
-                    ['label' => 'Novo', 'icon'=>'plus-sign', 'url'=>'#'],
-                    ['label' => 'Gerenciar', 'icon'=>'th-list', 'url'=>'#'],
+                    ['label' => 'Novo', 'icon'=>'plus-sign', 'url'=> ['/cliente/create']],
+                    ['label' => 'Gerenciar', 'icon'=>'th-list', 'url'=> ['/cliente/index']],
                 ],
             ],
             [
@@ -113,7 +113,7 @@ $this->registerCss("
                 ],
             ],
             [
-                'label' => 'Usuário',
+                'label' => 'Usuários',
                 'icon' => 'cog',
                 'url'=>['/usuario/index']
             ],
