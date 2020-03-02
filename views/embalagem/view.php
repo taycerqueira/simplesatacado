@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\CategoriaProduto */
+/* @var $model app\models\Embalagem */
 
-$this->title = 'Categoria: '.$model->nome;
-$this->params['breadcrumbs'][] = ['label' => 'Categoria de Produto', 'url' => ['index']];
+$this->title = 'Embalagem: '.$model->descricao;
+$this->params['breadcrumbs'][] = ['label' => 'Embalagens', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="categoria-produto-view">
+<div class="embalagem-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'nome',
+            'descricao',
             ['attribute' => 'criado',       'format' => ['date', 'dd/MM/yyyy H:i:s']],
             ['attribute' => 'modificado',   'format' => ['date', 'dd/MM/yyyy H:i:s']],
         ],
@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Excluir', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Tem certeza que deseja excluir a embalagem '.$model->descricao,
                 'method' => 'post',
             ],
         ]) ?>
