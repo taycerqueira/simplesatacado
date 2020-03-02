@@ -34,8 +34,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value'     => implode(", ", $model->telefone)
             ],
             'observacoes',
-            ['attribute' => 'criado', 'format' => ['date', 'd/m/Y H:i:s']],
-            ['attribute' => 'modificado', 'format' => ['date', 'd/m/Y H:i:s']],
+            ['attribute' => 'criado',       'format' => ['date', 'dd/MM/yyyy H:i:s']],
+            ['attribute' => 'modificado',   'format' => ['date', 'dd/MM/yyyy H:i:s']],
         ],
     ]) ?>
 

@@ -29,7 +29,7 @@ $this->registerCss("
         margin-left: -180px !important;
     }
     .container{
-        margin-left: 205px !important;
+        margin-left: 220px !important;
     }
     .container {
         width: 85%;;
@@ -87,16 +87,19 @@ $this->registerCss("
                 'label' => 'Cliente',
                 'icon' => 'user',
                 'items' => [
-                    ['label' => 'Novo', 'icon'=>'plus-sign', 'url'=> ['/cliente/create']],
-                    ['label' => 'Gerenciar', 'icon'=>'th-list', 'url'=> ['/cliente/index']],
+                    ['label' => 'Novo',         'icon'=>'plus-sign',    'url'=> ['/cliente/create']],
+                    ['label' => 'Gerenciar',    'icon'=>'th-list',      'url'=> ['/cliente/index']],
                 ],
             ],
             [
                 'label' => 'Produto',
                 'icon' => 'barcode',
                 'items' => [
-                    ['label' => 'Novo', 'icon'=>'plus-sign', 'url'=>'#'],
-                    ['label' => 'Gerenciar', 'icon'=>'th-list', 'url'=>'#'],
+                    ['label' => 'Novo',         'icon' => 'plus-sign',            'url' => ['/produto/create']],
+                    ['label' => 'Gerenciar',    'icon' => 'th-list',              'url' => ['/produto/index']],
+                    ['label' => 'Categorias',   'icon' => 'tags',                 'url' => ['/categoria_produto/index']],
+                    ['label' => 'Embalagens',   'icon' => 'inbox',                'url' => ['/embalagem/index']],
+                    ['label' => 'Marcas',       'icon' => 'registration-mark',    'url' => ['/marca/index']],
                 ],
             ],
             [
