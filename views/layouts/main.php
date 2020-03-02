@@ -97,7 +97,7 @@ $this->registerCss("
                 'items' => [
                     ['label' => 'Novo',         'icon' => 'plus-sign',            'url' => ['/produto/create']],
                     ['label' => 'Gerenciar',    'icon' => 'th-list',              'url' => ['/produto/index']],
-                    ['label' => 'Categorias',   'icon' => 'tags',                 'url' => ['/categoria_produto/index']],
+                    ['label' => 'Categorias',   'icon' => 'tags',                 'url' => ['/categoria-produto/index']],
                     ['label' => 'Embalagens',   'icon' => 'inbox',                'url' => ['/embalagem/index']],
                     ['label' => 'Marcas',       'icon' => 'registration-mark',    'url' => ['/marca/index']],
                 ],
