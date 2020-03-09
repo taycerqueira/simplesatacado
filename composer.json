@@ -23,6 +23,7 @@
         "kartik-v/yii2-widget-sidenav": "@dev",
         "kartik-v/yii2-widget-select2": "dev-master",
         "kartik-v/yii2-widget-switchinput": "dev-master",
+        "kartik-v/yii2-number": "*",
         "unclead/yii2-multiple-input": "~2.0"
     },
     "require-dev": {
