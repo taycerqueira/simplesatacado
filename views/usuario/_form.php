@@ -14,7 +14,10 @@ use yii\widgets\ActiveForm;
 
     <div class="row">
         <div class="col-md-6">
-        <?= $form->field($model, 'nome')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'nome')->textInput([
+            'maxlength' => true,
+            'style' => 'text-transform: uppercase'
+            ]) ?>
         </div>
     </div>
 

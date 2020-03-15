@@ -18,7 +18,10 @@ use unclead\multipleinput\MultipleInput;
 
     <div class="row">
         <div class="col-md-6">
-        <?= $form->field($model, 'nome')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'nome')->textInput([
+            'maxlength' => true,
+            'style' => 'text-transform: uppercase'
+            ]) ?>
         </div>
         <div class="col-md-3">
         <?= $form->field($model, 'cnpj')->widget(\yii\widgets\MaskedInput::className(), [
