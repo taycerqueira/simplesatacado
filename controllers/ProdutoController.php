@@ -104,12 +104,34 @@ class ProdutoController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', "Produto alterado com sucesso!");
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
             'model' => $model,
         ]);
+    }
+
+    public function actionUpdateEspecificacao($id)
+    {
+        $model = ProdutoEspeficado::findOne($id);
+        if(!empty($model)){
+            $produto = $model->getIdProduto0()->one();
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                Yii::$app->session->setFlash('success', "Especificação de produto alterada com sucesso!");
+                return $this->redirect(['view', 'id' => $produto->id]);
+            }
+            return $this->render('updateEspecificacao', [
+                'model'     => $model,
+                'produto'   => $produto
+            ]);
+        }
+        else{
+            Yii::$app->session->setFlash('error', "Especificação de produto não encontrada");
+            return $this->redirect(['index']);
+        }
+
     }
 
     /**
