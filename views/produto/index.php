@@ -37,14 +37,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'idEmbalagem',
                 'filter'    => ArrayHelper::map(Embalagem::find()->asArray()->all(), 'id', 'descricao'),
                 'value'     => function($data){
-                    return $data->getIdEmbalagem0()->one()->nome;
+                    return $data->getIdEmbalagem0()->one()->descricao;
                 }
             ], 
             [
                 'attribute' => 'idMarca',
                 'filter'    => ArrayHelper::map(Marca::find()->asArray()->all(), 'id', 'nome'),
                 'value'     => function($data){
-                    return $data->getIdMarca0()->one()->nome;
+                    return $data->idMarca ? $data->getIdMarca0()->one()->nome : "(sem marca)";
                 }
             ], 
             [
@@ -56,16 +56,14 @@ $this->params['breadcrumbs'][] = $this->title;
             ], 
             [
                 'attribute'         => 'preco_custo',
-                'value'             => 'Yii::$app->formatter->asCurrency($data->preco_custo)',
+                'format'            => 'currency',
                 'headerOptions'     => ['style' => 'width: 5%;']
             ],             
             [
                 'attribute'         => 'preco_venda',
-                'value'             => 'Yii::$app->formatter->asCurrency($data->preco_venda)',
+                'format'            => 'currency',
                 'headerOptions'     => ['style' => 'width: 5%;']
             ], 
-            //'criado',
-            //'modificado',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use app\models\ProdutoEspeficado;
+
 
 /**
  * This is the model class for table "produto".
@@ -70,6 +72,19 @@ class Produto extends \yii\db\ActiveRecord
             'modificado' => 'Modificado',
             'tipo' => 'O que deseja fazer?',
         ];
+    }
+
+    public function afterSave($insert, $changedAttributes){
+        parent::afterSave($insert, $changedAttributes);
+        if($insert){
+            $especificacao = new ProdutoEspeficado();
+            $especificacao->idProduto       = $this->id;
+            $especificacao->especificacao   = 'SORT';
+            $especificacao->padrao          = 1;
+            if(!$especificacao->save()){
+                Yii::$app->session->setFlash('error', "Erro ao gerar especificação padrão");
+            }
+        }
     }
 
     /**

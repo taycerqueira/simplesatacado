@@ -67,6 +67,7 @@ class MarcaController extends Controller
         $model = new Marca();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', "Marca cadastrada com sucesso!");
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

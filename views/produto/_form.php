@@ -1,7 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-//use yii\widgets\ActiveForm;
 use kartik\form\ActiveForm;
 use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
@@ -18,7 +17,9 @@ use kartik\number\NumberControl;
 
 <div class="produto-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'enableClientValidation'    =>  false
+        ]); ?>
 
     <div class="row">
         <div class="col-md-4">
@@ -29,7 +30,7 @@ use kartik\number\NumberControl;
         </div>
     </div>
 
-    <div class="panel panel-default produto">
+    <div class="panel panel-default panel-produto" style="display: <?= $modelProduto->tipo == 'E' ? 'none' : 'block' ?>">
         <div class="panel-heading">
             <h3 class="panel-title">Novo Produto</h3>
         </div>
@@ -58,8 +59,8 @@ use kartik\number\NumberControl;
             <div class="row">
                 <div class="col-md-6">
                     <?= $form->field($modelProduto, 'nome')->textInput([
-                        'maxlength' => true,
-                        'style' => 'text-transform: uppercase'
+                            'maxlength' => true,
+                            'style' => 'text-transform: uppercase'
                         ]) ?>
                 </div>
                 <div class="col-md-2">
@@ -97,7 +98,7 @@ use kartik\number\NumberControl;
         </div>
     </div>
 
-    <div class="panel panel-default especificacao" style="display: <?= $modelProduto->tipo == 'P' ? 'none' : 'block' ?>">
+    <div class="panel panel-default panel-especificacao" style="display: <?= $modelProduto->tipo == 'P' ? 'none' : 'block' ?>">
         <div class="panel-heading">
             <h3 class="panel-title">Nova Especificação</h3>
         </div>
@@ -111,6 +112,12 @@ use kartik\number\NumberControl;
                         'allowClear' => true
                     ],
                 ]); ?>
+                </div>
+                <div class="col-md-8">
+                    <?= $form->field($modelProdutoEspecificado, 'especificacao')->textInput([
+                            'maxlength' => true,
+                            'style' => 'text-transform: uppercase'
+                        ]) ?>
                 </div>
             </div>
         </div>

@@ -67,6 +67,7 @@ class ClienteController extends Controller
         $model = new Cliente();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', "Cliente cadastrado com sucesso!");
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

@@ -68,14 +68,16 @@ class ProdutoController extends Controller
         $modelProduto               = new Produto();
         $modelProduto->tipo         = 'P';
         $modelProdutoEspecificado   = new ProdutoEspeficado();
-        if ($modelProduto->load(Yii::$app->request->post())) {
+        if($modelProduto->load(Yii::$app->request->post())){
             if($modelProduto->tipo == 'P'){
                 if($modelProduto->save()){
+                    Yii::$app->session->setFlash('success', "Produto cadastrado com sucesso!");
                     return $this->redirect(['view', 'id' => $modelProduto->id]);
                 }
             }
-            else{
-                if($modelProdutoEspecificado->save()){
+            else if($modelProduto->tipo == 'E'){
+                if($modelProdutoEspecificado->load(Yii::$app->request->post()) && $modelProdutoEspecificado->save()){
+                    Yii::$app->session->setFlash('success', "Especificação de produto cadastrada com sucesso!");
                     return $this->redirect(['view', 'id' => $modelProdutoEspecificado->idProduto]);
                 }
             }

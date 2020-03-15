@@ -67,6 +67,7 @@ class EmbalagemController extends Controller
         $model = new Embalagem();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', "Embalagem cadastrada com sucesso!");
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
