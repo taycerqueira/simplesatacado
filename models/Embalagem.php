@@ -48,6 +48,15 @@ class Embalagem extends \yii\db\ActiveRecord
         ];
     }
 
+    public function beforeSave($insert)
+    {
+        if(!parent::beforeSave($insert)){
+            return false;
+        }
+        $this->descricao = strtoupper($this->descricao);
+        return true;
+    }
+
     /**
      * {@inheritdoc}
      * @return EmbalagemQuery the active query used by this AR class.

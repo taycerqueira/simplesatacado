@@ -48,6 +48,15 @@ class CategoriaProduto extends \yii\db\ActiveRecord
         ];
     }
 
+    public function beforeSave($insert)
+    {
+        if(!parent::beforeSave($insert)){
+            return false;
+        }
+        $this->nome = strtoupper($this->nome);
+        return true;
+    }
+
     /**
      * {@inheritdoc}
      * @return CategoriaProdutoQuery the active query used by this AR class.

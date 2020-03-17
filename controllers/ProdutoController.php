@@ -4,7 +4,6 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Produto;
-use app\models\ProdutoEspeficado;
 use app\models\ProdutoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -65,30 +64,15 @@ class ProdutoController extends Controller
      */
     public function actionCreate()
     {
-        $modelProduto               = new Produto();
-        $modelProduto->tipo         = 'P';
-        $modelProdutoEspecificado   = new ProdutoEspeficado();
-        if($modelProduto->load(Yii::$app->request->post())){
-            if($modelProduto->tipo == 'P'){
-                if($modelProduto->save()){
-                    Yii::$app->session->setFlash('success', "Produto cadastrado com sucesso!");
-                    return $this->redirect(['view', 'id' => $modelProduto->id]);
-                }
-            }
-            else if($modelProduto->tipo == 'E'){
-                if($modelProdutoEspecificado->load(Yii::$app->request->post()) && $modelProdutoEspecificado->save()){
-                    Yii::$app->session->setFlash('success', "Especificação de produto cadastrada com sucesso!");
-                    return $this->redirect(['view', 'id' => $modelProdutoEspecificado->idProduto]);
-                }
-            }
-        }
-        else{
+        $model = new Produto();
 
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', "Produto cadastrado com sucesso!");
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
-            'modelProduto'              => $modelProduto,
-            'modelProdutoEspecificado'  => $modelProdutoEspecificado,
+            'model' => $model,
         ]);
     }
 
@@ -104,34 +88,13 @@ class ProdutoController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', "Produto alterado com sucesso!");
+            Yii::$app->session->setFlash('success', "Cliente alterado com sucesso!");
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
             'model' => $model,
         ]);
-    }
-
-    public function actionUpdateEspecificacao($id)
-    {
-        $model = ProdutoEspeficado::findOne($id);
-        if(!empty($model)){
-            $produto = $model->getIdProduto0()->one();
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                Yii::$app->session->setFlash('success', "Especificação de produto alterada com sucesso!");
-                return $this->redirect(['view', 'id' => $produto->id]);
-            }
-            return $this->render('updateEspecificacao', [
-                'model'     => $model,
-                'produto'   => $produto
-            ]);
-        }
-        else{
-            Yii::$app->session->setFlash('error', "Especificação de produto não encontrada");
-            return $this->redirect(['index']);
-        }
-
     }
 
     /**

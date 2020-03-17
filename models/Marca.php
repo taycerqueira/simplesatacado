@@ -48,6 +48,15 @@ class Marca extends \yii\db\ActiveRecord
         ];
     }
 
+    public function beforeSave($insert)
+    {
+        if(!parent::beforeSave($insert)){
+            return false;
+        }
+        $this->nome = strtoupper($this->nome);
+        return true;
+    }
+
     /**
      * {@inheritdoc}
      * @return MarcaQuery the active query used by this AR class.

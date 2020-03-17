@@ -66,6 +66,7 @@ class Cliente extends \yii\db\ActiveRecord
         if (!parent::beforeSave($insert)){
             return false;
         }
+        $this->nome = strtoupper($this->nome);
         if(is_array($this->telefone)){
             $this->telefone = implode(",", $this->telefone);
         }

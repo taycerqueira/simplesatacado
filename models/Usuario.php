@@ -60,6 +60,15 @@ class Usuario extends \yii\db\ActiveRecord implements IdentityInterface
         ];
     }
 
+    public function beforeSave($insert)
+    {
+        if(!parent::beforeSave($insert)){
+            return false;
+        }
+        $this->nome = strtoupper($this->nome);
+        return true;
+    }
+
     /**
      * Localiza uma identidade pelo ID informado
      *

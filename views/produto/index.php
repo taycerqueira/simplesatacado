@@ -32,7 +32,11 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute'         => 'id',
                 'headerOptions'     => ['style' => 'width: 5%;']
-            ],            'nome',
+            ],
+            [
+                'attribute' => 'nome',
+
+            ],            
             [
                 'attribute' => 'idEmbalagem',
                 'filter'    => ArrayHelper::map(Embalagem::find()->asArray()->all(), 'id', 'descricao'),

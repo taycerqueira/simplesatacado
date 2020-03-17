@@ -3,8 +3,6 @@
 namespace app\models;
 
 use Yii;
-use app\models\ProdutoEspeficado;
-
 
 /**
  * This is the model class for table "produto".
@@ -22,12 +20,9 @@ use app\models\ProdutoEspeficado;
  * @property CategoriaProduto $idCategoriaProduto0
  * @property Embalagem $idEmbalagem0
  * @property Marca $idMarca0
- * @property ProdutoEspecificado[] $produtoEspecificados
  */
 class Produto extends \yii\db\ActiveRecord
 {
-    public $tipo; //P -> produto | E -> especificação
-
     /**
      * {@inheritdoc}
      */
@@ -47,7 +42,6 @@ class Produto extends \yii\db\ActiveRecord
             [['preco_custo', 'preco_venda'], 'number'],
             [['criado', 'modificado'], 'safe'],
             [['nome'], 'string', 'max' => 255],
-            [['tipo'], 'string', 'max' => 1],
             [['nome'], 'unique'],
             [['idCategoriaProduto'], 'exist', 'skipOnError' => true, 'targetClass' => CategoriaProduto::className(), 'targetAttribute' => ['idCategoriaProduto' => 'id']],
             [['idEmbalagem'], 'exist', 'skipOnError' => true, 'targetClass' => Embalagem::className(), 'targetAttribute' => ['idEmbalagem' => 'id']],
@@ -70,21 +64,21 @@ class Produto extends \yii\db\ActiveRecord
             'preco_venda' => 'Preço de venda',
             'criado' => 'Criado',
             'modificado' => 'Modificado',
-            'tipo' => 'O que deseja fazer?',
         ];
     }
 
-    public function afterSave($insert, $changedAttributes){
-        parent::afterSave($insert, $changedAttributes);
-        if($insert){
-            $especificacao = new ProdutoEspeficado();
-            $especificacao->idProduto       = $this->id;
-            $especificacao->especificacao   = 'SORT';
-            $especificacao->padrao          = 1;
-            if(!$especificacao->save()){
-                Yii::$app->session->setFlash('error', "Erro ao gerar especificação padrão");
-            }
+    public function afterFind()
+    {
+        parent::afterFind();
+    }
+
+    public function beforeSave($insert)
+    {
+        if(!parent::beforeSave($insert)){
+            return false;
         }
+        $this->nome = strtoupper($this->nome);
+        return true;
     }
 
     /**
@@ -115,16 +109,6 @@ class Produto extends \yii\db\ActiveRecord
     public function getIdMarca0()
     {
         return $this->hasOne(Marca::className(), ['id' => 'idMarca']);
-    }
-
-    /**
-     * Gets query for [[ProdutoEspecificados]].
-     *
-     * @return \yii\db\ActiveQuery|ProdutoEspecificadoQuery
-     */
-    public function getProdutoEspecificados()
-    {
-        return $this->hasMany(ProdutoEspecificado::className(), ['idProdutoBase' => 'id']);
     }
 
     /**
