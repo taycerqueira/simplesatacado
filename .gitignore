@@ -31,3 +31,9 @@ tests/_support/_generated
 
 #vagrant folder
 /.vagrant
+
+#docker-files
+/docker-files/mysql-data
+
+#yii framework
+/yii2-vendor

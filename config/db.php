@@ -2,7 +2,7 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=atacado',
+    'dsn' => 'mysql:host=mysql8.0-atacado;dbname=atacado',
     'username' => 'root',
     'password' => 'root',
     'charset' => 'utf8',

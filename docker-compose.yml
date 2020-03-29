@@ -1,9 +1,44 @@
-version: '2'
+version: "3"
 services:
-  php:
-    image: yiisoftware/yii2-php:7.1-apache
-    volumes:
-      - ~/.composer-docker/cache:/root/.composer/cache:delegated
-      - ./:/app:delegated
-    ports:
-      - '8000:80'
+    php:
+        build: './docker-files/php/'
+        container_name: php7.4-atacado
+        volumes:
+            - ./:/var/www/html/
+        links: 
+            - mysql
+    apache:
+        build: './docker-files/apache/'
+        container_name: apache-atacado
+        depends_on:
+            - php
+            - mysql
+        ports:
+            - "80:80"
+        volumes:
+            - ./:/var/www/html/
+    mysql:
+        image: mysql:8.0
+        container_name: mysql8.0-atacado
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: root 
+        #command: mysqld --sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
+        volumes:
+            - ./docker-files/mysql-data:/var/lib/mysql
+        networks:
+            - default
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: phpmyadmin-atacado
+        links:
+            - mysql:db
+        ports:
+            - "81:80"
+        restart: always
+        environment:
+            PMA_HOST: mysql
+            PMA_PORT: 3306
+            UPLOAD_LIMIT: 300000000 # 300MB
+
